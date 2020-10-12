@@ -1,10 +1,10 @@
 # stock-analysis
 
-##Overview of Project: 
+## Overview of Project: 
 
 During the initial phases of this project, we were tasked by Steve to develop a VBA script to do some basic analytics of a set of stock data. The data set is a years worth of daily entries for a number of different stocks, containing basic information like opening price, closing price, trading volume, etc. A basic brute force script was developed to calculate the total trading volume and yearly return for each of the 12 listed stocks. While functional, there was concern that it was inefficient and processor heavy, and that there might be issues scaling it beyond the given data set. To that end, after establishing that our initial approach was sound, we decided to see if we could refactor our script to reduce overhead and increase efficiency 
 
-##Results: 
+## Results: 
 
 Our initial approach used a series of heavy loops. There are 3012 rows in our data set. Our initial code required a full pass evaluation through that data set for each stock entry, with the output written at the end of each pass, as shown in this code:
 
@@ -55,8 +55,7 @@ Our initial approach used a series of heavy loops. There are 3012 rows in our da
         Cells(4 + i, 3).Value = endingPrice / startingPrice - 1
         
     Next i
-
-    ```
+```
 
 Across 12 stocks and three different evaluations (volume, beginning, and end), that 108,432 touches in a single run, plus writes at the end. 
 
@@ -169,16 +168,21 @@ To increase efficiency, we changed over to an array model, as shown here:
         
     Next i
 
-    ```
+```
 
 As you can see, by establishing a series of output arrays (tickerVolumes, tickerStartingPrices, and tickerEndingPrices), we were able to write the relevant data into these arrays in a single pass. We do this by establishing the variable tickerIndex to unify the data across arrays, then increment it at each transition between individual stocks. Once the arrays are full, we then do a final output to our presentation sheet. This drastically reduces the overhead per run, as can be seen in the following images;
+
+**Initial Runs:**
 
 ![2017 Original](/Resources/yearValueAnalysisRuntime2017.png)
 ![2018 Original](/Resources/yearValueAnalysisRuntime2018.png)
 
+
+**Refactored Runs:**
+
 ![2017 Refactored](/Resources/VBA_Challenge_2017.png)
 ![2018 Refactored](/Resources/VBA_Challenge_2017.png)
 
-##Summary: 
+## Summary: 
 
 Given the above results, the refactored script should be much more scalable than the initial approach. However, it did require extensive effort above and beyond the initial code, which did work. It is also more complicated, may introduce additional points of failure, and may be harder to maintain. 
