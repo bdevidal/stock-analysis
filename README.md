@@ -170,7 +170,7 @@ To increase efficiency, we changed over to an array model, as shown here:
 
 ```
 
-As you can see, by establishing a series of output arrays (tickerVolumes, tickerStartingPrices, and tickerEndingPrices), we were able to write the relevant data into these arrays in a single pass. We do this by establishing the variable tickerIndex to unify the data across arrays, then increment it at each transition between individual stocks. Once the arrays are full, we then do a final output to our presentation sheet. This drastically reduces the overhead per run, as can be seen in the following images;
+As you can see, by establishing a series of output arrays (`tickerVolumes`, `tickerStartingPrices`, and `tickerEndingPrices`), we were able to write the relevant data into these arrays in a single pass. We do this by establishing the variable `tickerIndex` to unify the data across arrays, then increment it at each transition between individual stocks. Once the arrays are full, we then do a final output to our presentation sheet. This drastically reduces the overhead per run, as can be seen in the following images;
 
 **Initial Runs:**
 
